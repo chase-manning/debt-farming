@@ -1,4 +1,5 @@
 export const INFURA_ID = "1704ebb4fcf041619a8b00b00d8d9aa3";
+export const GRAPH_ID = "8024b44cdade2959f9bc05a5e611182c";
 
 interface GlobalsType {
   WETH: string;
