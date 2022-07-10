@@ -1,6 +1,11 @@
 import styled from "styled-components";
 import useReserves from "../../contracts/reserves";
 import useStrategies from "../../contracts/strategies";
+import useYields from "../../contracts/yields";
+
+// TODO Make sure we're only calling APIs once
+// TODO Include single sided liquidity
+// TODO Website
 
 const StyledHomePage = styled.div`
   width: 100%;
@@ -12,21 +17,40 @@ const StyledHomePage = styled.div`
   border: solid 1px orange;
 `;
 
-const Header = styled.div`
+const Row = styled.div`
   width: 100%;
-  font-size: 2.3rem;
+  display: flex;
 `;
 
+const Column = styled.div`
+  font-size: 2rem;
+  flex: 1;
+`;
+
+const roundToDp = (number: number, dp: number) => {
+  return Math.round(number * 10 ** dp) / 10 ** dp;
+};
+
+const formatPercent = (number: number) => `${roundToDp(number, 2)}%`;
+
 const HomePage = () => {
-  const reserves = useReserves();
-  const strategies = useStrategies();
-  console.log(strategies);
+  const strategies = useStrategies("USDC");
 
   return (
     <StyledHomePage>
-      {reserves.map((reserve) => (
-        <Header>{reserve.liquidityRate}</Header>
-      ))}
+      {strategies
+        .sort((a, b) => b.netApy - a.netApy)
+        .map((s, index: number) => (
+          <Row key={index}>
+            <Column>{formatPercent(s.netApy)}</Column>
+            <Column>{s.collateral.symbol}</Column>
+            <Column>{formatPercent(s.collateral.liquidityRate)}</Column>
+            <Column>{s.debt.symbol}</Column>
+            <Column>{formatPercent(s.debt.borrowRate)}</Column>
+            <Column>{s.yield.protocol}</Column>
+            <Column>{formatPercent(s.yield.apy)}</Column>
+          </Row>
+        ))}
     </StyledHomePage>
   );
 };
