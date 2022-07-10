@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import useStrategies from "../../contracts/strategies";
 
-// TODO Include single sided liquidity
 // TODO Account for borrowable amount
 // TODO Add more lending protocols
 // TODO Website
 // TODO Add Convex cvxCRV pool
+// TODO Add COMP rewards to calcs
 
 const StyledHomePage = styled.div`
   width: 100%;
