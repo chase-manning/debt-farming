@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { createClient } from "urql";
+import { stringToNumber } from "./helpers";
+import { Reserve } from "./reserves";
 
 const tokensQuery = `
   query {
@@ -26,7 +28,7 @@ const client = createClient({
   url: "https://api.thegraph.com/subgraphs/name/aave/protocol-v2",
 });
 
-interface Reserve {
+interface ReserveResponse {
   availableLiquidity: string;
   borrowingEnabled: boolean;
   decimals: number;
@@ -39,16 +41,35 @@ interface Reserve {
   variableBorrowRate: string;
 }
 
-export const useAaveReserves = () => {
+const useAaveReserves = () => {
   const [reserves, setReserves] = useState<Reserve[]>([]);
 
   useEffect(() => {
     const getReserves = async () => {
       const response = await client.query(tokensQuery).toPromise();
-      setReserves(response.data.protocols[0].pools[0].reserves);
+      setReserves(
+        response.data.protocols[0].pools[0].reserves
+          .filter(
+            (reserve: ReserveResponse) =>
+              reserve.isActive &&
+              !reserve.isFrozen &&
+              reserve.borrowingEnabled &&
+              reserve.usageAsCollateralEnabled
+          )
+          .map((reserve: ReserveResponse) => {
+            return {
+              symbol: reserve.symbol,
+              liquidityRate: stringToNumber(reserve.liquidityRate, 25),
+              borrowRate: stringToNumber(reserve.variableBorrowRate, 25),
+              protocol: "Aave V2",
+            };
+          })
+      );
     };
     getReserves();
   }, []);
 
   return reserves;
 };
+
+export default useAaveReserves;
