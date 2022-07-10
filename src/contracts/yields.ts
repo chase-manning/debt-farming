@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { DEFI_LAMA_YIELDS_URL } from "../app/globals";
 
-interface Yield {
+export interface Yield {
   symbol: string;
   protocol: string;
   apy: number;
