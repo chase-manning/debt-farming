@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { DEFI_LAMA_YIELDS_URL } from "../app/globals";
+import { tokensAreSameCurrency } from "../config/tokenCurrencies";
 import tokenPrefixes, { TokenPrefix } from "../config/tokenPrefixes";
 import { getVolatileToken } from "../config/volatileTokens";
 
@@ -63,8 +64,10 @@ const useYields = (): Yield[] => {
             // Extracting most volatile asset
             if (symbol.includes("-")) {
               const symbols = symbol.split("-");
-              const volatileToken = getVolatileToken(symbols);
-              if (volatileToken) symbol = volatileToken;
+              if (tokensAreSameCurrency(symbols)) {
+                const volatileToken = getVolatileToken(symbols);
+                if (volatileToken) symbol = volatileToken;
+              }
             }
 
             // Removing redundant prefixes
