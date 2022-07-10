@@ -51,10 +51,7 @@ const useAaveReserves = () => {
         response.data.protocols[0].pools[0].reserves
           .filter(
             (reserve: ReserveResponse) =>
-              reserve.isActive &&
-              !reserve.isFrozen &&
-              reserve.borrowingEnabled &&
-              reserve.usageAsCollateralEnabled
+              reserve.isActive && !reserve.isFrozen && reserve.borrowingEnabled
           )
           .map((reserve: ReserveResponse) => {
             return {
