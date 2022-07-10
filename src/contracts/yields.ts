@@ -44,9 +44,15 @@ const useYields = (): Yield[] => {
         data.data
           .filter((res: Response) => res.chain === "Ethereum")
           .map((res: Response) => {
+            let { symbol } = res;
+            const protocol = res.projectName;
+            if (protocol === "Compound" && symbol.substring(0, 1) === "c")
+              symbol = symbol.substring(1);
+            if (protocol === "Yearn Finance" && symbol.substring(0, 2) === "yv")
+              symbol = symbol.substring(2);
             return {
-              symbol: res.symbol,
-              protocol: res.projectName,
+              symbol,
+              protocol,
               apy: res.apy,
             };
           })
