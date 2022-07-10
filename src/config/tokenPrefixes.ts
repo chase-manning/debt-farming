@@ -12,6 +12,14 @@ const tokenPrefixes: TokenPrefix[] = [
     protocol: "Yearn Finance",
     prefix: "yv",
   },
+  {
+    protocol: "Vesper",
+    prefix: "va",
+  },
+  {
+    protocol: "Vesper",
+    prefix: "v",
+  },
 ];
 
 export default tokenPrefixes;
