@@ -1,5 +1,7 @@
 import { isPegged } from "../config/peggedTokens";
-import useReserves, { Reserve } from "./reserves";
+import useAaveReserves from "./aaveReserves";
+import useCompoundReserves from "./compoundReserves";
+import { Reserve } from "./reserves";
 import useYields, { Yield } from "./yields";
 
 interface Strategy {
@@ -9,10 +11,11 @@ interface Strategy {
   netApy: number;
 }
 
-const useStrategies = (token: string): Strategy[] => {
-  const reserves = useReserves();
-  const yields = useYields();
-
+const getStrategies = (
+  yields: Yield[],
+  reserves: Reserve[],
+  token: string
+): Strategy[] => {
   const collateral = reserves.find((reserve) =>
     isPegged(reserve.symbol, token)
   );
@@ -51,6 +54,17 @@ const useStrategies = (token: string): Strategy[] => {
       netApy: collateral.liquidityRate + y.apy - debt.borrowRate,
     };
   });
+};
+
+const useStrategies = (token: string): Strategy[] => {
+  const aaveReserves = useAaveReserves();
+  const compoundReserves = useCompoundReserves();
+  const yields = useYields();
+
+  return [
+    ...getStrategies(yields, aaveReserves, token),
+    ...getStrategies(yields, compoundReserves, token),
+  ];
 };
 
 export default useStrategies;
