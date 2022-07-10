@@ -1,3 +1,4 @@
+import { isPegged } from "../config/peggedTokens";
 import useReserves, { Reserve } from "./reserves";
 import useYields, { Yield } from "./yields";
 
@@ -12,18 +13,20 @@ const useStrategies = (token: string): Strategy[] => {
   const reserves = useReserves();
   const yields = useYields();
 
-  const collateral = reserves.find((reserve) => reserve.symbol === token);
+  const collateral = reserves.find((reserve) =>
+    isPegged(reserve.symbol, token)
+  );
 
   const farmableYields = yields.filter((y: Yield) =>
     reserves.some(
       (reserve: Reserve) =>
-        reserve.symbol === y.symbol &&
+        isPegged(reserve.symbol, y.symbol) &&
         y.apy > reserve.borrowRate &&
-        reserve.symbol !== token
+        !isPegged(reserve.symbol, token)
     )
   );
   return farmableYields.map((y: Yield) => {
-    const debt = reserves.find((reserve) => reserve.symbol === y.symbol);
+    const debt = reserves.find((reserve) => isPegged(reserve.symbol, y.symbol));
     if (!collateral || !debt)
       return {
         collateral: {
