@@ -34,6 +34,12 @@ interface Response {
   category: string;
 }
 
+const removeParentheses = (string: string): string => {
+  const parenthesisPosition = string.indexOf("(");
+  if (parenthesisPosition === -1) return string;
+  return string.substring(0, parenthesisPosition - 1);
+};
+
 const useYields = (): Yield[] => {
   const [yields, setYields] = useState<Yield[]>([]);
 
@@ -47,6 +53,9 @@ const useYields = (): Yield[] => {
           .map((res: Response) => {
             let { symbol } = res;
             const protocol = res.projectName;
+
+            // Removing parenthesis from symbol
+            symbol = removeParentheses(symbol);
 
             // Removing redundant prefixes
             tokenPrefixes.forEach((prefix: TokenPrefix) => {
