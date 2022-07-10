@@ -52,7 +52,7 @@ const useYields = (): Yield[] => {
           .filter((res: Response) => res.chain === "Ethereum")
           .map((res: Response) => {
             let { symbol } = res;
-            const protocol = res.projectName;
+            const protocol = res.project;
 
             // Removing parenthesis from symbol
             symbol = removeParentheses(symbol);
