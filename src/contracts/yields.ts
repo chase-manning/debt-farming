@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { DEFI_LAMA_YIELDS_URL } from "../app/globals";
 
-interface Strategy {
+interface Yield {
   symbol: string;
   protocol: string;
   apy: number;
@@ -33,20 +33,20 @@ interface Response {
   category: string;
 }
 
-const useStrategies = (): Strategy[] => {
-  const [strategies, setStrategies] = useState<Strategy[]>([]);
+const useYields = (): Yield[] => {
+  const [yields, setYields] = useState<Yield[]>([]);
 
   useEffect(() => {
     const getYields = async () => {
       const response = await fetch(DEFI_LAMA_YIELDS_URL);
       const data = await response.json();
-      setStrategies(
+      setYields(
         data.data
           .filter((res: Response) => res.chain === "Ethereum")
           .map((res: Response) => {
             return {
               symbol: res.symbol,
-              protocol: res.pool,
+              protocol: res.projectName,
               apy: res.apy,
             };
           })
@@ -55,7 +55,7 @@ const useStrategies = (): Strategy[] => {
     getYields();
   }, []);
 
-  return strategies;
+  return yields;
 };
 
-export default useStrategies;
+export default useYields;
