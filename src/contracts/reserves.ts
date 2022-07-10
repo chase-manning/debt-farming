@@ -2,8 +2,8 @@ import useAaveReserves from "./aaveReserves";
 
 export interface Reserve {
   symbol: string;
-  liquidityRate: string;
-  borrowRate: string;
+  liquidityRate: number;
+  borrowRate: number;
   protocol: string;
 }
 
