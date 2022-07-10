@@ -25,6 +25,20 @@ const volatileTokens: string[] = [
   "USDK",
   "DUSD",
   "RSV",
+  "renBTC",
+  "sBTC",
+  "wibBTC",
+  "HBTC",
+  "pBTC",
+  "oBTC",
+  "BBTC",
+  "stETH",
+  "alETH",
+  "sETH",
+  "rETH",
+  "wstETH",
+  "ankrETH",
+  "rETH",
 ];
 
 export default volatileTokens;
