@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import useStrategies from "../../contracts/strategies";
 
-// TODO CRV and FRAX Convex pools not showing
-// TODO Make sure we're only calling APIs once
-// TODO Account for all the top ones
 // TODO Include single sided liquidity
+// TODO Account for borrowable amount
+// TODO Add more lending protocols
 // TODO Website
+// TODO Add Convex cvxCRV pool
 
 const StyledHomePage = styled.div`
   width: 100%;
@@ -43,6 +43,7 @@ const HomePage = () => {
         .map((s, index: number) => (
           <Row key={index}>
             <Column>{formatPercent(s.netApy)}</Column>
+            <Column>{s.collateral.protocol}</Column>
             <Column>{s.collateral.symbol}</Column>
             <Column>{formatPercent(s.collateral.liquidityRate)}</Column>
             <Column>{s.debt.symbol}</Column>
