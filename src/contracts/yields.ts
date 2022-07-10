@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { DEFI_LAMA_YIELDS_URL } from "../app/globals";
+import tokenPrefixes, { TokenPrefix } from "../config/tokenPrefixes";
 
 export interface Yield {
   symbol: string;
@@ -46,10 +47,15 @@ const useYields = (): Yield[] => {
           .map((res: Response) => {
             let { symbol } = res;
             const protocol = res.projectName;
-            if (protocol === "Compound" && symbol.substring(0, 1) === "c")
-              symbol = symbol.substring(1);
-            if (protocol === "Yearn Finance" && symbol.substring(0, 2) === "yv")
-              symbol = symbol.substring(2);
+
+            // Removing redundant prefixes
+            tokenPrefixes.forEach((prefix: TokenPrefix) => {
+              if (protocol !== prefix.protocol) return;
+              if (!symbol.startsWith(prefix.prefix)) return;
+              symbol = symbol.replace(prefix.prefix, "");
+            });
+
+            // Returning the yield
             return {
               symbol,
               protocol,
