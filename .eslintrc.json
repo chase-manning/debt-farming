@@ -68,6 +68,7 @@
     "import/prefer-default-export": "off",
     "import/no-cycle": "off",
     "no-alert": "off",
+    "no-continue": "off",
     "no-bitwise": "off",
     "no-case-declarations": "off",
     "no-cond-assign": "off",
