@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import WethSwap from "./WethSwap";
+import useReserves from "../../contracts/reserves";
+import useStrategies from "../../contracts/strategies";
 
 const StyledHomePage = styled.div`
   width: 100%;
@@ -17,10 +18,15 @@ const Header = styled.div`
 `;
 
 const HomePage = () => {
+  const reserves = useReserves();
+  const strategies = useStrategies();
+  console.log(strategies);
+
   return (
     <StyledHomePage>
-      <Header>pages/home-page/HomePage.tsx</Header>
-      <WethSwap />
+      {reserves.map((reserve) => (
+        <Header>{reserve.liquidityRate}</Header>
+      ))}
     </StyledHomePage>
   );
 };
