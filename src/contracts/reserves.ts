@@ -1,4 +1,5 @@
 import useAaveReserves from "./aaveReserves";
+import useCompoundReserves from "./compoundReserves";
 
 export interface Reserve {
   symbol: string;
@@ -9,8 +10,9 @@ export interface Reserve {
 
 const useReserves = (): Reserve[] => {
   const aaveReserves = useAaveReserves();
+  const compoundReserves = useCompoundReserves();
 
-  return aaveReserves;
+  return [...aaveReserves, ...compoundReserves];
 };
 
 export default useReserves;
