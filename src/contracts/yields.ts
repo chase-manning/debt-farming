@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { DEFI_LAMA_YIELDS_URL } from "../app/globals";
 import tokenPrefixes, { TokenPrefix } from "../config/tokenPrefixes";
+import { getVolatileToken } from "../config/volatileTokens";
 
 export interface Yield {
   symbol: string;
@@ -49,13 +50,22 @@ const useYields = (): Yield[] => {
       const data = await response.json();
       setYields(
         data.data
-          .filter((res: Response) => res.chain === "Ethereum")
+          .filter(
+            (res: Response) => res.chain === "Ethereum" && res.tvlUsd >= 100_000
+          )
           .map((res: Response) => {
             let { symbol } = res;
             const protocol = res.project;
 
             // Removing parenthesis from symbol
             symbol = removeParentheses(symbol);
+
+            // Extracting most volatile asset
+            if (symbol.includes("-")) {
+              const symbols = symbol.split("-");
+              const volatileToken = getVolatileToken(symbols);
+              if (volatileToken) symbol = volatileToken;
+            }
 
             // Removing redundant prefixes
             tokenPrefixes.forEach((prefix: TokenPrefix) => {
