@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import useReserves from "../../contracts/reserves";
 import useStrategies from "../../contracts/strategies";
-import useYields from "../../contracts/yields";
 
+// TODO CRV and FRAX Convex pools not showing
 // TODO Make sure we're only calling APIs once
+// TODO Account for all the top ones
 // TODO Include single sided liquidity
 // TODO Website
 
@@ -47,6 +47,7 @@ const HomePage = () => {
             <Column>{formatPercent(s.collateral.liquidityRate)}</Column>
             <Column>{s.debt.symbol}</Column>
             <Column>{formatPercent(s.debt.borrowRate)}</Column>
+            <Column>{s.yield.symbol}</Column>
             <Column>{s.yield.protocol}</Column>
             <Column>{formatPercent(s.yield.apy)}</Column>
           </Row>
