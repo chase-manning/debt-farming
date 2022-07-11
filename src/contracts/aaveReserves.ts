@@ -17,7 +17,8 @@ const tokensQuery = `
           totalLiquidity,
           availableLiquidity,
           variableBorrowRate,
-          liquidityRate
+          liquidityRate,
+          baseLTVasCollateral
         }
       }
     }
@@ -39,6 +40,7 @@ interface ReserveResponse {
   totalLiquidity: string;
   usageAsCollateralEnabled: boolean;
   variableBorrowRate: string;
+  baseLTVasCollateral: string;
 }
 
 const useAaveReserves = () => {
@@ -50,8 +52,7 @@ const useAaveReserves = () => {
       setReserves(
         response.data.protocols[0].pools[0].reserves
           .filter(
-            (reserve: ReserveResponse) =>
-              reserve.isActive && !reserve.isFrozen && reserve.borrowingEnabled
+            (reserve: ReserveResponse) => reserve.isActive && !reserve.isFrozen
           )
           .map((reserve: ReserveResponse) => {
             return {
@@ -59,6 +60,11 @@ const useAaveReserves = () => {
               liquidityRate: stringToNumber(reserve.liquidityRate, 25),
               borrowRate: stringToNumber(reserve.variableBorrowRate, 25),
               protocol: "Aave V2",
+              collateralFactor: Number(reserve.baseLTVasCollateral) / 10_000,
+              canUseAsCollateral: reserve.usageAsCollateralEnabled,
+              canBorrow:
+                reserve.borrowingEnabled &&
+                Number(reserve.baseLTVasCollateral) / 10_000 !== 0,
             };
           })
       );

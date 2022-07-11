@@ -6,6 +6,9 @@ export interface Reserve {
   liquidityRate: number;
   borrowRate: number;
   protocol: string;
+  collateralFactor: number;
+  canUseAsCollateral: boolean;
+  canBorrow: boolean;
 }
 
 const useReserves = (): Reserve[] => {
