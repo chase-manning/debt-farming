@@ -9,6 +9,9 @@ const tokensQuery = `
 		  symbol,
       borrowAPY,
       supplyAPY,
+      totalBalancesUsd,
+      totalBorrowsUsd,
+      decimals,
       config {
         collateralFactor,
         borrowIsolated,
@@ -25,7 +28,10 @@ const client = createClient({
 interface ReserveResponse {
   borrowAPY: string;
   supplyAPY: string;
+  totalBalancesUsd: string;
+  totalBorrowsUsd: string;
   symbol: string;
+  decimals: string;
   config: {
     collateralFactor: string;
     borrowIsolated: boolean;
@@ -39,22 +45,36 @@ const useEulerReseves = () => {
   useEffect(() => {
     const getReserves = async () => {
       const response = await client.query(tokensQuery).toPromise();
-      console.log(response);
       setReserves(
         response.data.assets
-          .filter((reserve: ReserveResponse) => reserve.config)
+          .filter(
+            (reserve: ReserveResponse) =>
+              stringToNumber(
+                reserve.totalBalancesUsd,
+                Number(reserve.decimals)
+              ) > 100 && reserve.config
+          )
           .map((reserve: ReserveResponse) => {
             return {
               symbol: reserve.symbol,
               liquidityRate: stringToNumber(reserve.supplyAPY, 25),
               borrowRate: stringToNumber(reserve.borrowAPY, 25),
               protocol: "Euler",
-              collateralFactor: stringToNumber(
-                reserve.config.collateralFactor,
-                10
-              ),
-              canUseAsCollateral: reserve.config.tier === "collateral",
-              canBorrow: true,
+              collateralFactor: 0.89,
+              // collateralFactor: stringToNumber(
+              //   reserve.config.collateralFactor,
+              //   10
+              // ),
+              canUseAsCollateral:
+                stringToNumber(
+                  reserve.totalBalancesUsd,
+                  Number(reserve.decimals)
+                ) > 100,
+              canBorrow:
+                stringToNumber(
+                  reserve.totalBorrowsUsd,
+                  Number(reserve.decimals)
+                ) > 1,
             };
           })
       );
