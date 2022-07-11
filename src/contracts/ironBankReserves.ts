@@ -79,8 +79,7 @@ const useIronBankReserves = () => {
               protocol: "Iron Bank",
               collateralFactor: Number(reserve.maximumLTV) / 100,
               canUseAsCollateral: reserve.canUseAsCollateral,
-              canBorrow:
-                reserve.canBorrowFrom && Number(reserve.maximumLTV) / 100 !== 0,
+              canBorrow: Number(reserve.maximumLTV) / 100 !== 0,
             };
           })
       );
