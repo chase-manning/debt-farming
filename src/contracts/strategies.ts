@@ -1,6 +1,7 @@
 import { isPegged } from "../config/peggedTokens";
 import useAaveReserves from "./aaveReserves";
 import useCompoundReserves from "./compoundReserves";
+import useIronBankReserves from "./ironBankReserves";
 import { Reserve } from "./reserves";
 import useYields, { Yield } from "./yields";
 
@@ -16,8 +17,8 @@ const getStrategies = (
   reserves: Reserve[],
   token: string
 ): Strategy[] => {
-  const collateral = reserves.find((reserve) =>
-    isPegged(reserve.symbol, token)
+  const collateral = reserves.find(
+    (reserve) => isPegged(reserve.symbol, token) && reserve.canUseAsCollateral
   );
 
   const farmableYields = yields.filter((y: Yield) =>
@@ -25,11 +26,15 @@ const getStrategies = (
       (reserve: Reserve) =>
         isPegged(reserve.symbol, y.symbol) &&
         y.apy > reserve.borrowRate &&
-        !isPegged(reserve.symbol, token)
+        !isPegged(reserve.symbol, token) &&
+        reserve.canBorrow
     )
   );
   return farmableYields.map((y: Yield) => {
-    const debt = reserves.find((reserve) => isPegged(reserve.symbol, y.symbol));
+    const debt = reserves.find(
+      (reserve) => isPegged(reserve.symbol, y.symbol) && reserve.canBorrow
+    );
+    // TODO Clean this up
     if (!collateral || !debt)
       return {
         collateral: {
@@ -37,12 +42,18 @@ const getStrategies = (
           liquidityRate: 0,
           borrowRate: 0,
           protocol: "",
+          collateralFactor: 0,
+          canBorrow: true,
+          canUseAsCollateral: true,
         },
         debt: {
           symbol: "",
           liquidityRate: 0,
           borrowRate: 0,
           protocol: "",
+          collateralFactor: 0,
+          canBorrow: true,
+          canUseAsCollateral: true,
         },
         yield: y,
         netApy: 0,
@@ -51,7 +62,9 @@ const getStrategies = (
       collateral,
       debt,
       yield: y,
-      netApy: collateral.liquidityRate + y.apy - debt.borrowRate,
+      netApy:
+        collateral.liquidityRate +
+        (y.apy - debt.borrowRate) * collateral.collateralFactor,
     };
   });
 };
@@ -59,11 +72,13 @@ const getStrategies = (
 const useStrategies = (token: string): Strategy[] => {
   const aaveReserves = useAaveReserves();
   const compoundReserves = useCompoundReserves();
+  const ironBankReserves = useIronBankReserves();
   const yields = useYields();
 
   return [
     ...getStrategies(yields, aaveReserves, token),
     ...getStrategies(yields, compoundReserves, token),
+    ...getStrategies(yields, ironBankReserves, token),
   ];
 };
 
