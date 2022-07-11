@@ -1,11 +1,9 @@
 import styled from "styled-components";
-import useStrategies from "../../contracts/strategies";
+import useStrategies from "../views/strategies";
 
-// TODO Account for borrowable amount
-// TODO Add more lending protocols
 // TODO Website
-// TODO Add Convex cvxCRV pool
 // TODO Add COMP rewards to calcs
+// TODO ADD EUL rewards to calcs
 
 const StyledHomePage = styled.div`
   width: 100%;

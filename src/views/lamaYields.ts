@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { DEFI_LAMA_YIELDS_URL } from "../app/globals";
+import { DEFI_LAMA_YIELDS_URL } from "../app/constants";
 import { tokensAreSameCurrency } from "../config/tokenCurrencies";
 import tokenPrefixes, { TokenPrefix } from "../config/tokenPrefixes";
 import { getVolatileToken } from "../config/volatileTokens";

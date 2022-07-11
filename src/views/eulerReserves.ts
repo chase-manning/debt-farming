@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { createClient } from "urql";
-import { stringToNumber } from "./helpers";
+import { stringToNumber } from "../app/helpers";
 import { Reserve } from "./reserves";
 
 const tokensQuery = `
