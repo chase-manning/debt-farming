@@ -37,6 +37,8 @@ const tokenCurrencies: string[][] = [
   ],
   ["renBTC", "sBTC", "wibBTC", "HBTC", "pBTC", "oBTC", "BBTC", "WBTC"],
   ["stETH", "alETH", "sETH", "rETH", "wstETH", "ankrETH", "rETH", "ETH"],
+  ["cvxCRV", "CRV"],
+  ["cvxFXS", "FXS"],
 ];
 
 export default tokenCurrencies;
