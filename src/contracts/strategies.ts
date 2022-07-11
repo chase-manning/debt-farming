@@ -1,6 +1,7 @@
 import { isPegged } from "../config/peggedTokens";
 import useAaveReserves from "./aaveReserves";
 import useCompoundReserves from "./compoundReserves";
+import useEulerReseves from "./eulerReserves";
 import useIronBankReserves from "./ironBankReserves";
 import { Reserve } from "./reserves";
 import useYields, { Yield } from "./yields";
@@ -73,12 +74,14 @@ const useStrategies = (token: string): Strategy[] => {
   const aaveReserves = useAaveReserves();
   const compoundReserves = useCompoundReserves();
   const ironBankReserves = useIronBankReserves();
+  const eulerReserves = useEulerReseves();
   const yields = useYields();
 
   return [
     ...getStrategies(yields, aaveReserves, token),
     ...getStrategies(yields, compoundReserves, token),
     ...getStrategies(yields, ironBankReserves, token),
+    ...getStrategies(yields, eulerReserves, token),
   ];
 };
 
