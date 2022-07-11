@@ -40,6 +40,8 @@ const volatileTokens: string[] = [
   "ankrETH",
   "rETH",
   "STETH",
+  "cvxCRV",
+  "cvxFXS",
 ];
 
 export default volatileTokens;
