@@ -42,6 +42,7 @@ const volatileTokens: string[] = [
   "STETH",
   "cvxCRV",
   "cvxFXS",
+  "bveCVX",
 ];
 
 export default volatileTokens;
