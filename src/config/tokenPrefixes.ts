@@ -5,19 +5,19 @@ export interface TokenPrefix {
 
 const tokenPrefixes: TokenPrefix[] = [
   {
-    protocol: "Compound",
+    protocol: "compound",
     prefix: "c",
   },
   {
-    protocol: "Yearn Finance",
+    protocol: "yearn-finance",
     prefix: "yv",
   },
   {
-    protocol: "Vesper",
+    protocol: "vesper",
     prefix: "va",
   },
   {
-    protocol: "Vesper",
+    protocol: "vesper",
     prefix: "v",
   },
 ];
