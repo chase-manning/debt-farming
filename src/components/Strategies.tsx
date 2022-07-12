@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 import useStrategies, { Strategy } from "../views/strategies";
 import Button from "./Button";
@@ -10,7 +11,7 @@ const StyledStrategies = styled.div`
 `;
 
 const Background = styled.img`
-  height: 70vh;
+  height: 700px;
 `;
 
 const Content = styled.div`
@@ -21,10 +22,39 @@ const Content = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  padding-bottom: 6vh;
-  padding-right: 8.3vh;
-  padding-left: 9vh;
-  padding-top: 7.5vh;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 36px;
+  padding-right: 80px;
+  padding-left: 87px;
+  padding-top: 72px;
+`;
+
+const Table = styled.div`
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+`;
+
+const Pages = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const Previus = styled.button`
+  background: var(--one);
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+`;
+
+const Page = styled.div`
+  padding: 0.5rem 1rem;
+`;
+
+const Next = styled.button`
+  background: var(--two);
+  padding: 0.5rem 1rem;
+  cursor: pointer;
 `;
 
 const Headers = styled.div`
@@ -43,14 +73,14 @@ const Header = styled.div`
 
 const HeaderEnd = styled.div`
   height: 1rem;
-  width: 116px;
+  width: 100px;
 `;
 
 const Row = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  padding: 0.5rem 0;
+  height: 40px;
 `;
 
 const Value = styled.div`
@@ -70,33 +100,60 @@ const formatPercent = (value: number) => {
 
 const Strategies = () => {
   const strategies = useStrategies("USDC");
+  const [page, setPage] = useState(0);
+
+  const rowsPerPage = 13;
+  const maxPages = Math.ceil(strategies.length / rowsPerPage);
 
   return (
     <StyledStrategies>
       <Background src={table} alt="Table background" />
       <Content>
-        <Headers>
-          <Header>Net APY</Header>
-          <Header>Lending Protocol</Header>
-          <Header>Debt Token</Header>
-          <Header>Yield Protocol</Header>
-          <Header>Yield Token</Header>
-          <HeaderEnd />
-        </Headers>
-        {strategies
-          .sort((a: Strategy, b: Strategy) => b.netApy - a.netApy)
-          .slice(0, 10)
-          .map((strategy: Strategy, index: number) => (
-            <Row key={index}>
-              <Value>{formatPercent(strategy.netApy)}</Value>
-              <Value>{strategy.collateral.protocol}</Value>
-              <Value>{strategy.debt.symbol}</Value>
-              <Value>{strategy.yield.protocol}</Value>
-              <Value>{strategy.yield.symbol}</Value>
-              <Button click={() => console.log("meow")}>Details</Button>
-              {/* <Value>Details</Value> */}
-            </Row>
-          ))}
+        <Table>
+          <Headers>
+            <Header>Net APY</Header>
+            <Header>Lending Protocol</Header>
+            <Header>Debt Token</Header>
+            <Header>Yield Protocol</Header>
+            <Header>Yield Token</Header>
+            <HeaderEnd />
+          </Headers>
+          {strategies
+            .sort((a: Strategy, b: Strategy) => b.netApy - a.netApy)
+            .slice(rowsPerPage * page, rowsPerPage * (page + 1))
+            .map((strategy: Strategy, index: number) => (
+              <Row key={index}>
+                <Value>{formatPercent(strategy.netApy)}</Value>
+                <Value>{strategy.collateral.protocol}</Value>
+                <Value>{strategy.debt.symbol}</Value>
+                <Value>{strategy.yield.protocol}</Value>
+                <Value>{strategy.yield.symbol}</Value>
+                <Button click={() => console.log("meow")}>Details</Button>
+                {/* <Value>Details</Value> */}
+              </Row>
+            ))}
+        </Table>
+        <Pages>
+          <Previus
+            onClick={() => {
+              if (page > 0) {
+                setPage(page - 1);
+              }
+            }}
+          >
+            Prev
+          </Previus>
+          <Page>{`${page + 1}/${maxPages}`}</Page>
+          <Next
+            onClick={() => {
+              if (page < maxPages - 1) {
+                setPage(page + 1);
+              }
+            }}
+          >
+            Next
+          </Next>
+        </Pages>
       </Content>
     </StyledStrategies>
   );
