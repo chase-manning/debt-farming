@@ -15,6 +15,8 @@ const StyledButton = styled.button`
     var(--main);
   background-color: ${(props: ButtonProps) =>
     props.primary ? "var(--primary)" : "var(--bg)"};
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
 
   font-size: 1.6rem;
 
