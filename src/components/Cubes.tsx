@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { useEffect, useState } from "react";
 import Cube from "./Cube";
+import useStrategies, { Strategy } from "../views/strategies";
 
 const StyledCubes = styled.div`
   position: absolute;
@@ -9,19 +9,36 @@ const StyledCubes = styled.div`
 `;
 
 const Cubes = () => {
-  const [showing, setShowing] = useState(false);
+  const usdcStrategies = useStrategies("USDC");
+  const ethStrategies = useStrategies("ETH");
+  const wbtcStrategies = useStrategies("WBTC");
 
-  useEffect(() => {
-    setTimeout(() => {
-      setShowing(true);
-    }, 1000);
-  }, []);
+  const getBestApy = (strategies: Strategy[]) => {
+    if (strategies.length === 0) return 0;
+    const apy = strategies.map((strategy) => strategy.netApy);
+    return Math.round(Math.max(...apy));
+  };
 
   return (
     <StyledCubes>
-      <Cube apy={44} position={2} show={showing} token="USDC" />
-      <Cube apy={44} position={1} show={showing} token="ETH" />
-      <Cube apy={44} position={0} show={showing} token="WBTC" />
+      <Cube
+        apy={getBestApy(usdcStrategies)}
+        position={2}
+        show={usdcStrategies.length > 0}
+        token="USDC"
+      />
+      <Cube
+        apy={getBestApy(ethStrategies)}
+        position={1}
+        show={ethStrategies.length > 0}
+        token="ETH"
+      />
+      <Cube
+        apy={getBestApy(wbtcStrategies)}
+        position={0}
+        show={wbtcStrategies.length > 0}
+        token="WBTC"
+      />
     </StyledCubes>
   );
 };
