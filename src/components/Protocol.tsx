@@ -13,6 +13,7 @@ const StyledProtocol = styled.div`
 const Icon = styled.img`
   height: 2.2rem;
   margin-right: 0.6rem;
+  border-radius: 50%;
 `;
 
 interface Props {
