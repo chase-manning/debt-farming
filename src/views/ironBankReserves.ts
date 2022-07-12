@@ -76,7 +76,7 @@ const useIronBankReserves = () => {
                       rate.side === "BORROWER" && rate.type === "VARIABLE"
                   )?.rate
                 ) || 0,
-              protocol: "Iron Bank",
+              protocol: "iron-bank",
               collateralFactor: Number(reserve.maximumLTV) / 100,
               canUseAsCollateral: reserve.canUseAsCollateral,
               canBorrow: Number(reserve.maximumLTV) / 100 !== 0,
