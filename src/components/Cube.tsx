@@ -95,7 +95,7 @@ const Cube = ({ position, apy, show, token }: Props) => {
   const [isHover, setIsHover] = useState(false);
 
   const transform = () => {
-    const base = show ? 0 : 200;
+    const base = show ? 0 : 210;
     const hover = isHover ? 20 : 0;
     return base + hover;
   };
