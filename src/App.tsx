@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import Footer from "./components/Footer";
-import HomePage from "./components/Main";
+import Main from "./components/Main";
 
 const StyledApp = styled.div`
   display: flex;
@@ -13,7 +13,7 @@ const StyledApp = styled.div`
 const App = () => {
   return (
     <StyledApp>
-      <HomePage />
+      <Main />
       <Footer />
     </StyledApp>
   );
