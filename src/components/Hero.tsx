@@ -6,23 +6,28 @@ import Cubes from "./Cubes";
 const StyledHero = styled.div`
   width: 100%;
   height: 100vh;
-  background: #f3f3f3;
+  background: var(--bg);
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 `;
 
 const SvgContainer = styled.div`
   height: 85vh;
 `;
 
-const Test = styled.div`
+const Button = styled.button`
   position: absolute;
-  top: 0;
-  right: 0;
-  width: 30%;
-  height: 30%;
+  bottom: -20%;
+  left: 5%;
+  width: 25%;
+  height: 35%;
+  border-top-right-radius: 70%;
+  border-top-left-radius: 45%;
+  border-bottom-left-radius: 30%;
+  border-bottom-right-radius: 80%;
 
   background-color: #f9e0d6;
   background-image: radial-gradient(
@@ -383,6 +388,7 @@ const Hero = () => {
         </svg>
       </SvgContainer>
       <Cubes />
+      <Button />
     </StyledHero>
   );
 };
