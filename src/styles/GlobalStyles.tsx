@@ -7,6 +7,9 @@ const GlobalStyle = createGlobalStyle`
         --sub: grey;
         --primary: #32B2E5;
         --error: red;
+        --one: #F8EBD4;
+        --two: #62E7FA;
+        --three: #F39CD2;
     }
 
     * {
