@@ -56,7 +56,9 @@ const TokenIcon = styled.img`
 `;
 
 const TokenSymbol = styled.div`
-  font-size: 1.3rem;
+  font-size: 1.6rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
 `;
 
 const ApyContainer = styled.div`
@@ -65,16 +67,21 @@ const ApyContainer = styled.div`
 `;
 
 const Apy = styled.div`
-  font-size: 5.2rem;
-  line-height: 0.6;
+  font-size: 6rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
 `;
 
 const Percent = styled.div`
-  font-size: 1.2rem;
+  font-size: 1.8rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
 `;
 
 const Label = styled.div`
-  font-size: 1.3rem;
+  font-size: 1.6rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
 `;
 
 interface Props {
