@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { DEFI_LAMA_PROTOCOLS_URL } from "../app/constants";
 
-export interface Protocol {
+export interface ProtocolType {
   id: string;
   name: string;
   logo: string;
@@ -34,17 +34,17 @@ interface Response {
   mcap: number;
 }
 
-const useProtocols = (): Protocol[] => {
-  const [protocols, setProtocols] = useState<Protocol[]>([]);
+const useProtocols = (): ProtocolType[] => {
+  const [protocols, setProtocols] = useState<ProtocolType[]>([]);
 
   useEffect(() => {
     const getProtocols = async () => {
       const response = await fetch(DEFI_LAMA_PROTOCOLS_URL);
       const data = await response.json();
       setProtocols(
-        data.map((res: Response): Protocol => {
+        data.map((res: Response): ProtocolType => {
           return {
-            id: res.id,
+            id: res.slug,
             name: res.name,
             logo: res.logo,
             audits: Number(res.audits),
