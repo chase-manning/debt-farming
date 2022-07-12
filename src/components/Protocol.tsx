@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import useProtocols, { ProtocolType } from "../views/protocols";
+import useProtocols from "../views/protocols";
 
 const StyledProtocol = styled.div`
   flex: 1;
