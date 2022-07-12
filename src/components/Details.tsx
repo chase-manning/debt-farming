@@ -11,6 +11,7 @@ const StyledDetails = styled.div`
   align-items: center;
   justify-content: space-evenly;
   position: relative;
+  z-index: 1;
 `;
 
 const Background = styled.img`
