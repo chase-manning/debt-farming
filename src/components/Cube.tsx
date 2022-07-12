@@ -2,6 +2,9 @@ import { useState } from "react";
 import styled from "styled-components";
 
 import cube from "../assets/hero/cube.svg";
+import usdc from "../assets/tokens/usdc.svg";
+import eth from "../assets/tokens/eth.svg";
+import wbtc from "../assets/tokens/btc.svg";
 
 const Container = styled.div`
   transition: all 1s ease-out;
@@ -27,27 +30,61 @@ const Asset = styled.img`
   height: 100%;
 `;
 
-const Face = styled.div`
+const Face = styled.button`
   position: absolute;
   display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-evenly;
   cursor: pointer;
 
   bottom: 2px;
   left: 2px;
   height: 41.5%;
   width: 34.8%;
-  background: linear-gradient(-45deg, #efa8d7, #f9f2d7);
+  /* background: linear-gradient(-45deg, #efa8d7, #f9f2d7); */
 `;
 
-const Apy = styled.div``;
+const TokenContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const TokenIcon = styled.img`
+  height: 20px;
+  margin-right: 0.4rem;
+`;
+
+const TokenSymbol = styled.div`
+  font-size: 1.3rem;
+`;
+
+const ApyContainer = styled.div`
+  display: flex;
+  align-items: flex-end;
+`;
+
+const Apy = styled.div`
+  font-size: 5.2rem;
+  line-height: 0.6;
+`;
+
+const Percent = styled.div`
+  font-size: 1.2rem;
+`;
+
+const Label = styled.div`
+  font-size: 1.3rem;
+`;
 
 interface Props {
   position: number;
   apy: number;
   show: boolean;
+  token: string;
 }
 
-const Cube = ({ position, apy, show }: Props) => {
+const Cube = ({ position, apy, show, token }: Props) => {
   const [isHover, setIsHover] = useState(false);
 
   const transform = () => {
@@ -66,7 +103,18 @@ const Cube = ({ position, apy, show }: Props) => {
           onMouseEnter={() => setIsHover(true)}
           onMouseLeave={() => setIsHover(false)}
         >
-          meow
+          <TokenContainer>
+            <TokenIcon
+              src={token === "USDC" ? usdc : token === "ETH" ? eth : wbtc}
+              alt={`${token} token`}
+            />
+            <TokenSymbol>{token}</TokenSymbol>
+          </TokenContainer>
+          <ApyContainer>
+            <Apy>{apy}</Apy>
+            <Percent>%</Percent>
+          </ApyContainer>
+          <Label>APY</Label>
         </Face>
       </StyledCube>
     </Container>

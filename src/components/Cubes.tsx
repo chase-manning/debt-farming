@@ -19,9 +19,9 @@ const Cubes = () => {
 
   return (
     <StyledCubes>
-      <Cube apy={44} position={2} show={showing} />
-      <Cube apy={44} position={1} show={showing} />
-      <Cube apy={44} position={0} show={showing} />
+      <Cube apy={44} position={2} show={showing} token="USDC" />
+      <Cube apy={44} position={1} show={showing} token="ETH" />
+      <Cube apy={44} position={0} show={showing} token="WBTC" />
     </StyledCubes>
   );
 };
