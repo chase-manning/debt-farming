@@ -19,7 +19,11 @@ const SvgContainer = styled.div`
   height: 85vh;
 `;
 
-const Hero = () => {
+interface Props {
+  setToken: (token: string) => void;
+}
+
+const Hero = ({ setToken }: Props) => {
   const [slideIn, setSlideIn] = useState(false);
   const [textTransform, setTextTransform] = useState({ x: 0, y: 0 });
 
@@ -347,7 +351,7 @@ const Hero = () => {
           </defs>
         </svg>
       </SvgContainer>
-      <Cubes />
+      <Cubes setToken={setToken} />
       <ScrollButton />
     </StyledHero>
   );

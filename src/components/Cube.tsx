@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
+import { Link } from "react-scroll";
 
 import cube from "../assets/hero/cube.svg";
 import usdc from "../assets/tokens/usdc.svg";
@@ -89,9 +90,10 @@ interface Props {
   apy: number;
   show: boolean;
   token: string;
+  setToken: (token: string) => void;
 }
 
-const Cube = ({ position, apy, show, token }: Props) => {
+const Cube = ({ position, apy, show, token, setToken }: Props) => {
   const [isHover, setIsHover] = useState(false);
 
   const transform = () => {
@@ -101,30 +103,38 @@ const Cube = ({ position, apy, show, token }: Props) => {
   };
 
   return (
-    <Container
-      style={{ transform: `translate(${transform()}px, -${transform()}px)` }}
+    <Link
+      to="details-scroll"
+      spy
+      smooth
+      duration={1000}
+      onClick={() => setToken(token)}
     >
-      <StyledCube position={position}>
-        <Asset src={cube} alt="Decorative cube" />
-        <Face
-          onMouseEnter={() => setIsHover(true)}
-          onMouseLeave={() => setIsHover(false)}
-        >
-          <TokenContainer>
-            <TokenIcon
-              src={token === "USDC" ? usdc : token === "ETH" ? eth : wbtc}
-              alt={`${token} token`}
-            />
-            <TokenSymbol>{token}</TokenSymbol>
-          </TokenContainer>
-          <ApyContainer>
-            <Apy>{apy}</Apy>
-            <Percent>%</Percent>
-          </ApyContainer>
-          <Label>APY</Label>
-        </Face>
-      </StyledCube>
-    </Container>
+      <Container
+        style={{ transform: `translate(${transform()}px, -${transform()}px)` }}
+      >
+        <StyledCube position={position}>
+          <Asset src={cube} alt="Decorative cube" />
+          <Face
+            onMouseEnter={() => setIsHover(true)}
+            onMouseLeave={() => setIsHover(false)}
+          >
+            <TokenContainer>
+              <TokenIcon
+                src={token === "USDC" ? usdc : token === "ETH" ? eth : wbtc}
+                alt={`${token} token`}
+              />
+              <TokenSymbol>{token}</TokenSymbol>
+            </TokenContainer>
+            <ApyContainer>
+              <Apy>{apy}</Apy>
+              <Percent>%</Percent>
+            </ApyContainer>
+            <Label>APY</Label>
+          </Face>
+        </StyledCube>
+      </Container>
+    </Link>
   );
 };
 

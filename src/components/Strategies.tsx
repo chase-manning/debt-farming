@@ -98,8 +98,12 @@ const formatPercent = (value: number) => {
   return `${roundToDp(value, 2)}%`;
 };
 
-const Strategies = () => {
-  const strategies = useStrategies("USDC");
+interface Props {
+  token: string;
+}
+
+const Strategies = ({ token }: Props) => {
+  const strategies = useStrategies(token);
   const [page, setPage] = useState(0);
 
   const rowsPerPage = 13;

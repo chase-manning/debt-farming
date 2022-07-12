@@ -23,11 +23,15 @@ const Background = styled.img`
   z-index: -1;
 `;
 
-const Details = () => {
+interface Props {
+  token: string;
+}
+
+const Details = ({ token }: Props) => {
   return (
     <StyledDetails id="details-scroll">
       <Background src={gradient} alt="Gradient background" />
-      <Strategies />
+      <Strategies token={token} />
     </StyledDetails>
   );
 };

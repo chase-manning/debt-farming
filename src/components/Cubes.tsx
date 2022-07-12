@@ -8,7 +8,11 @@ const StyledCubes = styled.div`
   right: 0;
 `;
 
-const Cubes = () => {
+interface Props {
+  setToken: (token: string) => void;
+}
+
+const Cubes = ({ setToken }: Props) => {
   const usdcStrategies = useStrategies("USDC");
   const ethStrategies = useStrategies("ETH");
   const wbtcStrategies = useStrategies("WBTC");
@@ -22,18 +26,21 @@ const Cubes = () => {
   return (
     <StyledCubes>
       <Cube
+        setToken={setToken}
         apy={getBestApy(usdcStrategies)}
         position={2}
         show={usdcStrategies.length > 0}
         token="USDC"
       />
       <Cube
+        setToken={setToken}
         apy={getBestApy(ethStrategies)}
         position={1}
         show={ethStrategies.length > 0}
         token="ETH"
       />
       <Cube
+        setToken={setToken}
         apy={getBestApy(wbtcStrategies)}
         position={0}
         show={wbtcStrategies.length > 0}
