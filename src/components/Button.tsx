@@ -11,19 +11,19 @@ const StyledButton = styled.button`
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  border: ${(props: ButtonProps) => (props.primary ? "0" : "1px")} solid
-    var(--main);
   background-color: ${(props: ButtonProps) =>
     props.primary ? "var(--primary)" : "var(--bg)"};
   font-family: "Poppins", sans-serif;
-  font-weight: 600;
-
+  font-weight: 500;
   font-size: 1.6rem;
+  border-radius: 0.5rem;
 
   :disabled {
     cursor: auto;
     background-color: var(--sub);
   }
+
+  background: linear-gradient(-45deg, var(--three), var(--one));
 `;
 
 interface Props {
