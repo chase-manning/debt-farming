@@ -25,7 +25,7 @@ const Background = styled.img`
 
 const Details = () => {
   return (
-    <StyledDetails>
+    <StyledDetails id="details-scroll">
       <Background src={gradient} alt="Gradient background" />
       <Strategies />
     </StyledDetails>

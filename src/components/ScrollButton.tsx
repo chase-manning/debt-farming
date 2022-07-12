@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-scroll";
 
 import portal from "../assets/hero/portal.jpg";
 import arrow from "../assets/hero/arrow.svg";
@@ -51,12 +52,14 @@ const Gradient = styled.img`
 
 const ScrollButton = () => {
   return (
-    <StyledScrollButton>
-      <Circle>
-        <Gradient src={portal} alt="Decorative gradient" />
-      </Circle>
-      <Arrow src={arrow} alt="Arrow" />
-    </StyledScrollButton>
+    <Link to="details-scroll" spy smooth duration={1000}>
+      <StyledScrollButton>
+        <Circle>
+          <Gradient src={portal} alt="Decorative gradient" />
+        </Circle>
+        <Arrow src={arrow} alt="Arrow" />
+      </StyledScrollButton>
+    </Link>
   );
 };
 
