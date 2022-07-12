@@ -59,7 +59,7 @@ const useEulerReseves = () => {
               symbol: reserve.symbol,
               liquidityRate: stringToNumber(reserve.supplyAPY, 25),
               borrowRate: stringToNumber(reserve.borrowAPY, 25),
-              protocol: "Euler",
+              protocol: "euler",
               collateralFactor: 0.89,
               // collateralFactor: stringToNumber(
               //   reserve.config.collateralFactor,
