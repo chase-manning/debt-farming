@@ -36,7 +36,7 @@ const useCompoundReserves = () => {
             symbol: reserve.underlyingSymbol,
             liquidityRate: Number(reserve.supplyRate) * 100,
             borrowRate: Number(reserve.borrowRate) * 100,
-            protocol: "Compound",
+            protocol: "compound",
             collateralFactor: Number(reserve.collateralFactor),
             canUseAsCollateral: Number(reserve.collateralFactor) !== 0,
             canBorrow: true,
