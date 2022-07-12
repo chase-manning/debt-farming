@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { TOKENLIST_URL } from "../app/constants";
+import { ethToken, TOKENLIST_URL } from "../app/constants";
 
 export interface Token {
   symbol: string;
@@ -36,7 +36,7 @@ const useTokens = () => {
     fetchTokens();
   }, []);
 
-  return tokens;
+  return [ethToken, ...tokens];
 };
 
 export default useTokens;
