@@ -3,6 +3,7 @@ import styled from "styled-components";
 import useStrategies, { Strategy } from "../views/strategies";
 import Button from "./Button";
 import table from "../assets/details/table.svg";
+import Protocol from "./Protocol";
 
 const StyledStrategies = styled.div`
   position: relative;
@@ -128,7 +129,7 @@ const Strategies = ({ token }: Props) => {
             .map((strategy: Strategy, index: number) => (
               <Row key={index}>
                 <Value>{formatPercent(strategy.netApy)}</Value>
-                <Value>{strategy.collateral.protocol}</Value>
+                <Protocol protocol={strategy.collateral.protocol} />
                 <Value>{strategy.debt.symbol}</Value>
                 <Value>{strategy.yield.protocol}</Value>
                 <Value>{strategy.yield.symbol}</Value>
