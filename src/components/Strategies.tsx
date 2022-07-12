@@ -133,7 +133,7 @@ const Strategies = ({ token }: Props) => {
                 <Protocol protocol={strategy.collateral.protocol} />
                 <Token symbol={strategy.debt.symbol} />
                 <Protocol protocol={strategy.yield.protocol} />
-                <Value>{strategy.yield.symbol}</Value>
+                <Token symbol={strategy.yield.symbol} />
                 <Button click={() => console.log("meow")}>Details</Button>
                 {/* <Value>Details</Value> */}
               </Row>
