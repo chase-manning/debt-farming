@@ -1,10 +1,10 @@
 <svg width="602" height="468" viewBox="0 0 602 468" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <path d="M485 -2.5L213.5 269.5H2L272.5 -2.5H485Z" fill="#F3F3F3"/>
-<rect x="2" y="269" width="212" height="197" fill="#F3F3F3" stroke="black" stroke-width="2"/>
-<line x1="1.29289" y1="269.293" x2="285.293" y2="-14.7072" stroke="black" stroke-width="2"/>
-<line x1="214.293" y1="269.293" x2="505.293" y2="-21.7072" stroke="black" stroke-width="2"/>
-<line x1="214.293" y1="466.293" x2="618.293" y2="62.2929" stroke="black" stroke-width="2"/>
-<path d="M214 466.5V270L483.5 -0.5L604 77.5L214 466.5Z" fill="url(#pattern0)" stroke="black"/>
+<rect x="2" y="269" width="212" height="197" fill="#F3F3F3" stroke="#221514" stroke-width="2"/>
+<line x1="1.29289" y1="269.293" x2="285.293" y2="-14.7072" stroke="#221514" stroke-width="2"/>
+<line x1="214.293" y1="269.293" x2="505.293" y2="-21.7072" stroke="#221514" stroke-width="2"/>
+<line x1="214.293" y1="466.293" x2="618.293" y2="62.2929" stroke="#221514" stroke-width="2"/>
+<path d="M214 466.5V270L483.5 -0.5L604 77.5L214 466.5Z" fill="url(#pattern0)" stroke="#221514"/>
 <defs>
 <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
 <use xlink:href="#image0_24_137" transform="translate(-0.298291) scale(0.000399145 0.000333333)"/>
