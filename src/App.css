@@ -1,0 +1,17 @@
+@font-face {
+  font-family: "Monument";
+  src: local("Monument"),
+    url("./assets/fonts/monument-extended-regular.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Monument";
+  font-weight: bold;
+  src: local("Monument"),
+    url("./assets/fonts/monument-extended-bold.otf") format("opentype");
+}
+
+* {
+  font-family: "Monument", sans-serif;
+  line-height: 0.7;
+}
