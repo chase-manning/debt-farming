@@ -6,6 +6,13 @@ const StyledProtocol = styled.div`
   font-size: 1.6rem;
   font-family: "Poppins", sans-serif;
   font-weight: 600;
+  display: flex;
+  align-items: center;
+`;
+
+const Icon = styled.img`
+  height: 2.2rem;
+  margin-right: 0.6rem;
 `;
 
 interface Props {
@@ -15,9 +22,12 @@ interface Props {
 const Protocol = ({ protocol }: Props) => {
   const protocols = useProtocols();
 
+  const p = protocols.find((p) => p.id === protocol);
+
   return (
     <StyledProtocol>
-      {protocols.find((p: ProtocolType) => p.id === protocol)?.name || "---"}
+      <Icon src={p?.logo} alt={`${p?.name} logo`} />
+      {p?.name || "---"}
     </StyledProtocol>
   );
 };
