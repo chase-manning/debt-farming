@@ -6,7 +6,7 @@ import useIronBankReserves from "./ironBankReserves";
 import { Reserve } from "./reserves";
 import useYields, { Yield } from "./yields";
 
-interface Strategy {
+export interface Strategy {
   collateral: Reserve;
   debt: Reserve;
   yield: Yield;
