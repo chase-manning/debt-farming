@@ -131,7 +131,7 @@ const Strategies = ({ token }: Props) => {
                 <Value>{formatPercent(strategy.netApy)}</Value>
                 <Protocol protocol={strategy.collateral.protocol} />
                 <Value>{strategy.debt.symbol}</Value>
-                <Value>{strategy.yield.protocol}</Value>
+                <Protocol protocol={strategy.yield.protocol} />
                 <Value>{strategy.yield.symbol}</Value>
                 <Button click={() => console.log("meow")}>Details</Button>
                 {/* <Value>Details</Value> */}
