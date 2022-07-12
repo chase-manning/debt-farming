@@ -4,6 +4,7 @@ import useStrategies, { Strategy } from "../views/strategies";
 import Button from "./Button";
 import table from "../assets/details/table.svg";
 import Protocol from "./Protocol";
+import Token from "./Token";
 
 const StyledStrategies = styled.div`
   position: relative;
@@ -130,7 +131,7 @@ const Strategies = ({ token }: Props) => {
               <Row key={index}>
                 <Value>{formatPercent(strategy.netApy)}</Value>
                 <Protocol protocol={strategy.collateral.protocol} />
-                <Value>{strategy.debt.symbol}</Value>
+                <Token symbol={strategy.debt.symbol} />
                 <Protocol protocol={strategy.yield.protocol} />
                 <Value>{strategy.yield.symbol}</Value>
                 <Button click={() => console.log("meow")}>Details</Button>
