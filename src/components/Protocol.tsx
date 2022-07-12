@@ -27,7 +27,7 @@ const Protocol = ({ protocol }: Props) => {
 
   return (
     <StyledProtocol>
-      <Icon src={p?.logo} alt={`${p?.name} logo`} />
+      {p && <Icon src={p?.logo} alt={`${p?.name} logo`} />}
       {p?.name || "---"}
     </StyledProtocol>
   );
