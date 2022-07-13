@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import useProtocols from "../views/protocols";
+import useProtocols, { ProtocolType } from "../views/protocols";
 
 const StyledProtocol = styled.div`
   flex: 1;
@@ -28,7 +28,7 @@ const Protocol = ({ protocol }: Props) => {
   return (
     <StyledProtocol>
       {p && <Icon src={p?.logo} alt={`${p?.name} logo`} />}
-      {p?.name || "---"}
+      {p?.name || protocol}
     </StyledProtocol>
   );
 };
