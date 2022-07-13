@@ -59,7 +59,7 @@ const useAaveReserves = () => {
               symbol: reserve.symbol,
               liquidityRate: stringToNumber(reserve.liquidityRate, 25),
               borrowRate: stringToNumber(reserve.variableBorrowRate, 25),
-              protocol: "aave",
+              protocol: "aave-v2",
               collateralFactor: Number(reserve.baseLTVasCollateral) / 10_000,
               canUseAsCollateral: reserve.usageAsCollateralEnabled,
               canBorrow:
