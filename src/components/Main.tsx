@@ -3,17 +3,15 @@ import styled from "styled-components";
 import Details from "./Details";
 import Hero from "./Hero";
 
-// TODO Implement mobile
-// TODO Update all metadata and SEO
-// TODO Farming clipping
-// TODO Swaps for collateral deposits
-
 // TODO Launch
 // TODO Max peer review
 // TODO Vinnie peer review
 // TODO share with backd
 // TODO Share on Twitter
 
+// TOOD Add swap suppor for collateral
+// TODO Farming clipping
+// TODO Clickable elements on details popup
 // TODO Performance analysis
 // TODO Add tests for all apis
 // TODO Add COMP rewards to calcs
