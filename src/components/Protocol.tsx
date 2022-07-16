@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import useProtocols, { ProtocolType } from "../views/protocols";
+import { useProtocol } from "../views/protocols";
 
 const StyledProtocol = styled.div`
   flex: 1;
@@ -21,9 +21,7 @@ interface Props {
 }
 
 const Protocol = ({ protocol }: Props) => {
-  const protocols = useProtocols();
-
-  const p = protocols.find((p) => p.id === protocol);
+  const p = useProtocol(protocol);
 
   return (
     <StyledProtocol>
