@@ -59,4 +59,9 @@ const useProtocols = (): ProtocolType[] => {
   return protocols;
 };
 
+export const useProtocol = (id: string): ProtocolType | undefined => {
+  const protocols = useProtocols();
+  return protocols.find((p) => p.id === id);
+};
+
 export default useProtocols;
