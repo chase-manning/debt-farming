@@ -7,7 +7,10 @@ import Hero from "./Hero";
 // TODO Vinnie peer review
 // TODO share with backd
 // TODO Share on Twitter
+// TODO List on all protocol sites
 
+// TODO Create APY API
+// TODO List on all APY Aggregators
 // TODO Make open source
 // TODO Add socials
 // TOOD Add swap suppor for collateral
