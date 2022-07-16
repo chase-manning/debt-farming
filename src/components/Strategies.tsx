@@ -16,6 +16,11 @@ const Container = styled.div`
 const TokenSelector = styled.div`
   display: flex;
   align-items: center;
+
+  @media (max-width: 600px) {
+    width: 100%;
+    justify-content: space-between;
+  }
 `;
 
 interface TokenOptionProps {
@@ -37,6 +42,11 @@ const TokenOption = styled.button`
   border-top: solid
     ${(props: TokenOptionProps) => (props.active ? "2px" : "4px")} var(--main);
   border-radius: 0.5rem;
+
+  @media (max-width: 600px) {
+    margin: 0;
+    padding: 0.5rem 1rem;
+  }
 `;
 
 interface PopupProps {
@@ -52,10 +62,22 @@ const StyledStrategies = styled.div`
   transform: ${({ show }: PopupProps) =>
     show ? "rotate(0)" : "rotate(-180deg)"};
   transform-origin: 50% calc(100% + (100vh - 700px) / 2);
+
+  @media (max-width: 600px) {
+    background: var(--bg);
+    border-radius: 1rem;
+    width: 100%;
+    margin-top: 3rem;
+    transform: none;
+  }
 `;
 
 const Background = styled.img`
   height: 700px;
+
+  @media (max-width: 600px) {
+    display: none;
+  }
 `;
 
 const Content = styled.div`
@@ -72,6 +94,11 @@ const Content = styled.div`
   padding-right: 80px;
   padding-left: 87px;
   padding-top: 72px;
+
+  @media (max-width: 600px) {
+    position: relative;
+    padding: 1rem;
+  }
 `;
 
 const Table = styled.div`
@@ -106,6 +133,18 @@ const Headers = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 1rem;
+
+  @media (max-width: 600px) {
+    > div:nth-child(2) {
+      display: none;
+    }
+    > div:nth-child(3) {
+      display: none;
+    }
+    > div:nth-child(4) {
+      display: none;
+    }
+  }
 `;
 
 const Header = styled.div`
@@ -113,6 +152,10 @@ const Header = styled.div`
   font-size: 1.8rem;
   font-family: "Poppins", sans-serif;
   font-weight: 800;
+
+  @media (max-width: 600px) {
+    font-size: 1.2rem;
+  }
 `;
 
 const HeaderEnd = styled.div`
@@ -163,6 +206,7 @@ const Strategies = ({ token, setToken }: Props) => {
               .slice(rowsPerPage * page, rowsPerPage * (page + 1))
               .map((strategy: StrategyType, index: number) => (
                 <Strategy
+                  mobileShowing={index === active}
                   strategy={strategy}
                   key={index}
                   showing={active === null ? false : index !== active}

@@ -18,6 +18,11 @@ const StyledButton = styled.button`
   font-size: 1.6rem;
   border-radius: 0.5rem;
 
+  @media (max-width: 600px) {
+    font-size: 1.2rem;
+    padding: 0.7rem 1.6rem;
+  }
+
   :disabled {
     cursor: auto;
     background-color: var(--sub);

@@ -7,6 +7,7 @@ import popup from "../assets/details/popup.svg";
 
 interface PopupProps {
   show: boolean;
+  mobileShow: boolean;
 }
 
 const Container = styled.div`
@@ -17,10 +18,21 @@ const Container = styled.div`
   transform: translate(-50%, -50%)
     ${({ show }: PopupProps) => (show ? "rotate(0)" : "rotate(-180deg)")};
   transform-origin: 50% calc(100% + (100vh - 800px) / 2);
+
+  @media (max-width: 600px) {
+    transform: none;
+    display: ${({ mobileShow }: PopupProps) => (mobileShow ? "flex" : "none")};
+    top: 0;
+    left: 0;
+  }
 `;
 
 const Background = styled.img`
   height: 800px;
+
+  @media (max-width: 600px) {
+    display: none;
+  }
 `;
 
 const ContentContainer = styled.div`
@@ -33,6 +45,13 @@ const ContentContainer = styled.div`
   padding-left: 7.9rem;
   width: 100%;
   height: 100%;
+
+  @media (max-width: 600px) {
+    background: var(--bg);
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+  }
 `;
 
 const Area = styled.div`
@@ -42,6 +61,10 @@ const Area = styled.div`
   padding: 3rem;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 600px) {
+    padding: 2rem;
+  }
 `;
 
 const ExitButton = styled.button`
@@ -65,12 +88,22 @@ const Header = styled.div`
   -webkit-text-fill-color: transparent;
   filter: brightness(0.93) saturate(1.2);
   transform: translateY(-1rem);
+
+  @media (max-width: 600px) {
+    font-size: 2rem;
+    transform: none;
+    margin-top: 4rem;
+  }
 `;
 
 const SubHeader = styled.div`
   font-size: 1.8rem;
   margin-bottom: 1rem;
   color: var(--sub);
+
+  @media (max-width: 600px) {
+    font-size: 1.2rem;
+  }
 `;
 
 const Content = styled.div`
@@ -80,10 +113,15 @@ const Content = styled.div`
   align-items: center;
   justify-content: space-around;
   height: 100%;
+
+  @media (max-width: 600px) {
+    justify-content: flex-start;
+  }
 `;
 
 interface Props {
   show: boolean;
+  mobileShow: boolean;
   close: () => void;
   header?: string;
   subHeader?: string;
@@ -94,6 +132,7 @@ interface Props {
 
 const Popup = ({
   show,
+  mobileShow,
   close,
   header,
   subHeader,
@@ -102,7 +141,7 @@ const Popup = ({
   children,
 }: Props) => {
   return (
-    <Container show={show}>
+    <Container show={show} mobileShow={mobileShow}>
       <Background src={popup} alt="Popup background" />
       <ContentContainer>
         <Area>

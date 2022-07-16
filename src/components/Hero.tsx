@@ -13,6 +13,10 @@ const StyledHero = styled.div`
   justify-content: center;
   align-items: center;
   overflow: hidden;
+
+  @media (max-width: 600px) {
+    display: none;
+  }
 `;
 
 const SvgContainer = styled.div`

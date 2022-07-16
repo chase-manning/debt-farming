@@ -13,6 +13,12 @@ const StyledDetails = styled.div`
   position: relative;
   z-index: 1;
   overflow: hidden;
+
+  @media (max-width: 600px) {
+    height: auto;
+    padding: 2rem;
+    min-height: 100vh;
+  }
 `;
 
 const Background = styled.img`
@@ -26,6 +32,13 @@ const Background = styled.img`
 
 const Header = styled.div`
   font-size: 3rem;
+  text-align: center;
+
+  @media (max-width: 600px) {
+    font-size: 2rem;
+    line-height: 1.2;
+    margin-bottom: 3rem;
+  }
 `;
 
 interface Props {

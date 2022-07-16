@@ -1,4 +1,3 @@
-import { useState } from "react";
 import styled from "styled-components";
 import { StrategyType } from "../views/strategies";
 import Button from "./Button";
@@ -11,6 +10,19 @@ const StyledStrategy = styled.div`
   display: flex;
   align-items: center;
   height: 40px;
+
+  @media (max-width: 600px) {
+    height: 30px;
+    > div:nth-child(2) {
+      display: none;
+    }
+    > div:nth-child(3) {
+      display: none;
+    }
+    > div:nth-child(4) {
+      display: none;
+    }
+  }
 `;
 
 const Value = styled.div`
@@ -18,6 +30,10 @@ const Value = styled.div`
   font-size: 1.6rem;
   font-family: "Poppins", sans-serif;
   font-weight: 600;
+
+  @media (max-width: 600px) {
+    font-size: 1.2rem;
+  }
 `;
 
 const Section = styled.div`
@@ -30,6 +46,12 @@ const SubHeader = styled.div`
   width: 100%;
   font-size: 2.4rem;
   margin-bottom: 1rem;
+
+  @media (max-width: 600px) {
+    font-size: 1.8rem;
+    margin-bottom: 0.7rem;
+    margin-top: 4rem;
+  }
 `;
 
 const Line = styled.div`
@@ -39,6 +61,31 @@ const Line = styled.div`
   line-height: 1.4;
   font-family: "Poppins", sans-serif;
   font-weight: 600;
+
+  @media (max-width: 600px) {
+    font-size: 1.2rem;
+    margin-top: 0.6rem;
+  }
+`;
+
+const Container = styled.div`
+  flex: 1;
+`;
+
+const HideOnMobile = styled.div`
+  display: flex;
+
+  @media (max-width: 600px) {
+    display: none;
+  }
+`;
+
+const ShowOnMobile = styled.div`
+  display: none;
+
+  @media (max-width: 600px) {
+    display: flex;
+  }
 `;
 
 const roundToDp = (value: number, dp: number) => {
@@ -52,10 +99,11 @@ const formatPercent = (value: number) => {
 interface Props {
   strategy: StrategyType;
   showing: boolean;
+  mobileShowing: boolean;
   setShowing: () => void;
 }
 
-const Strategy = ({ showing, strategy, setShowing }: Props) => {
+const Strategy = ({ showing, mobileShowing, strategy, setShowing }: Props) => {
   const requiresSwap = strategy.debt.symbol !== strategy.yield.symbol;
 
   return (
@@ -63,9 +111,23 @@ const Strategy = ({ showing, strategy, setShowing }: Props) => {
       <StyledStrategy>
         <Value>{formatPercent(strategy.netApy)}</Value>
         <Protocol protocol={strategy.collateral.protocol} />
-        <Token symbol={strategy.debt.symbol} />
+        <Container>
+          <ShowOnMobile>
+            <Value>{strategy.debt.symbol}</Value>
+          </ShowOnMobile>
+          <HideOnMobile>
+            <Token symbol={strategy.debt.symbol} />
+          </HideOnMobile>
+        </Container>
         <Protocol protocol={strategy.yield.protocol} />
-        <Token symbol={strategy.yield.symbol} />
+        <Container>
+          <ShowOnMobile>
+            <Value>{strategy.yield.symbol}</Value>
+          </ShowOnMobile>
+          <HideOnMobile>
+            <Token symbol={strategy.yield.symbol} />
+          </HideOnMobile>
+        </Container>
         <Button
           click={() => {
             setShowing();
@@ -75,6 +137,7 @@ const Strategy = ({ showing, strategy, setShowing }: Props) => {
         </Button>
       </StyledStrategy>
       <Popup
+        mobileShow={mobileShowing}
         show={showing}
         close={() => {
           setShowing();
