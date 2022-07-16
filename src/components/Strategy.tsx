@@ -20,10 +20,6 @@ const Value = styled.div`
   font-weight: 600;
 `;
 
-interface Props {
-  strategy: StrategyType;
-}
-
 const roundToDp = (value: number, dp: number) => {
   return Math.round(value * 10 ** dp) / 10 ** dp;
 };
@@ -32,8 +28,13 @@ const formatPercent = (value: number) => {
   return `${roundToDp(value, 2)}%`;
 };
 
-const Strategy = ({ strategy }: Props) => {
-  const [open, setOpen] = useState(false);
+interface Props {
+  strategy: StrategyType;
+  showing: boolean;
+  setShowing: () => void;
+}
+
+const Strategy = ({ showing, strategy, setShowing }: Props) => {
   return (
     <>
       <StyledStrategy>
@@ -42,10 +43,21 @@ const Strategy = ({ strategy }: Props) => {
         <Token symbol={strategy.debt.symbol} />
         <Protocol protocol={strategy.yield.protocol} />
         <Token symbol={strategy.yield.symbol} />
-        <Button click={() => setOpen(true)}>Details</Button>
+        <Button
+          click={() => {
+            setShowing();
+          }}
+        >
+          Details
+        </Button>
       </StyledStrategy>
-      <Popup show={open} close={() => setOpen(false)}>
-        meow
+      <Popup
+        show={showing}
+        close={() => {
+          setShowing();
+        }}
+      >
+        {strategy.debt.symbol}
       </Popup>
     </>
   );

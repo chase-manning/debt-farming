@@ -1,13 +1,23 @@
 import { useState } from "react";
 import styled from "styled-components";
+
 import useStrategies, { StrategyType } from "../views/strategies";
 import table from "../assets/details/table.svg";
 import Strategy from "./Strategy";
+
+interface PopupProps {
+  show: boolean;
+}
 
 const StyledStrategies = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
+
+  transition: transform 1s ease-in-out;
+  transform: ${({ show }: PopupProps) =>
+    show ? "rotate(0)" : "rotate(-180deg)"};
+  transform-origin: 50% calc(100% + (100vh - 700px) / 2);
 `;
 
 const Background = styled.img`
@@ -83,12 +93,13 @@ interface Props {
 const Strategies = ({ token }: Props) => {
   const strategies = useStrategies(token);
   const [page, setPage] = useState(0);
+  const [active, setActive] = useState<number | null>(null);
 
   const rowsPerPage = 13;
   const maxPages = Math.ceil(strategies.length / rowsPerPage);
 
   return (
-    <StyledStrategies>
+    <StyledStrategies show={active === null}>
       <Background src={table} alt="Table background" />
       <Content>
         <Table>
@@ -104,7 +115,15 @@ const Strategies = ({ token }: Props) => {
             .sort((a: StrategyType, b: StrategyType) => b.netApy - a.netApy)
             .slice(rowsPerPage * page, rowsPerPage * (page + 1))
             .map((strategy: StrategyType, index: number) => (
-              <Strategy strategy={strategy} key={index} />
+              <Strategy
+                strategy={strategy}
+                key={index}
+                showing={active === null ? false : index !== active}
+                setShowing={() => {
+                  if (active === null) setActive(index);
+                  else setActive(null);
+                }}
+              />
             ))}
         </Table>
         <Pages>
