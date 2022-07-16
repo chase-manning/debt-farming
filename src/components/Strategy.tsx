@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useProtocol } from "../views/protocols";
 import { StrategyType } from "../views/strategies";
 import Button from "./Button";
 import Popup from "./Popup";
@@ -105,6 +106,8 @@ interface Props {
 
 const Strategy = ({ showing, mobileShowing, strategy, setShowing }: Props) => {
   const requiresSwap = strategy.debt.symbol !== strategy.yield.symbol;
+  const lendingProtocol = useProtocol(strategy.collateral.protocol);
+  const yieldProtocol = useProtocol(strategy.yield.protocol);
 
   return (
     <>
@@ -149,20 +152,22 @@ const Strategy = ({ showing, mobileShowing, strategy, setShowing }: Props) => {
           <Line>{`Earn ${formatPercent(strategy.netApy)} net yield on your ${
             strategy.collateral.symbol
           } by using it as collateral on ${
-            strategy.collateral.protocol
+            lendingProtocol?.name || strategy.collateral.protocol
           } to borrow ${strategy.debt.symbol}${
             requiresSwap ? `, swapping it to ${strategy.yield.symbol},` : ""
-          } and depositing it into ${strategy.yield.protocol}.`}</Line>
+          } and depositing it into ${
+            yieldProtocol?.name || strategy.yield.protocol
+          }.`}</Line>
         </Section>
         <Section>
           <SubHeader>Steps</SubHeader>
           <Line>{`1. Deposit ${strategy.collateral.symbol} as collateral on ${
-            strategy.collateral.protocol
+            lendingProtocol?.name || strategy.collateral.protocol
           } earning ${formatPercent(
             strategy.collateral.liquidityRate
           )} yield.`}</Line>
           <Line>{`2. Borrow ${strategy.debt.symbol} on ${
-            strategy.debt.protocol
+            lendingProtocol?.name || strategy.collateral.protocol
           } using max ${formatPercent(
             strategy.collateral.collateralFactor * 100
           )} LTV at a ${formatPercent(
@@ -173,17 +178,27 @@ const Strategy = ({ showing, mobileShowing, strategy, setShowing }: Props) => {
           )}
           <Line>{`${requiresSwap ? 4 : 3}. Deposit ${
             strategy.yield.symbol
-          } into ${strategy.yield.protocol} earning ${formatPercent(
-            strategy.yield.apy
-          )} yield.`}</Line>
+          } into ${
+            yieldProtocol?.name || strategy.yield.protocol
+          } earning ${formatPercent(strategy.yield.apy)} yield.`}</Line>
         </Section>
         <Section>
           <SubHeader>Maintenance</SubHeader>
           <Line>
-            {`- Monitor your position on ${strategy.collateral.protocol}, repaying or borrowing more ${strategy.debt.symbol} as needed to maintain a good health factor.`}
+            {`- Monitor your position on ${
+              lendingProtocol?.name || strategy.collateral.protocol
+            }, repaying or borrowing more ${
+              strategy.debt.symbol
+            } as needed to maintain a good health factor.`}
           </Line>
           <Line>
-            {`- Monitor the interest rate for borrowing ${strategy.debt.symbol} on ${strategy.debt.protocol}, and the yield for depositing ${strategy.yield.symbol} on ${strategy.yield.protocol}. Ensuring there is a positive arbitrage opportunity.`}
+            {`- Monitor the interest rate for borrowing ${
+              strategy.debt.symbol
+            } on ${
+              lendingProtocol?.name || strategy.debt.protocol
+            }, and the yield for depositing ${strategy.yield.symbol} on ${
+              yieldProtocol?.name || strategy.yield.protocol
+            }. Ensuring there is a positive arbitrage opportunity.`}
           </Line>
         </Section>
       </Popup>
