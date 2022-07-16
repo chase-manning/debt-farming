@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Cube from "./Cube";
-import useStrategies, { Strategy } from "../views/strategies";
+import useStrategies, { StrategyType } from "../views/strategies";
 
 const StyledCubes = styled.div`
   position: absolute;
@@ -17,7 +17,7 @@ const Cubes = ({ setToken }: Props) => {
   const ethStrategies = useStrategies("ETH");
   const wbtcStrategies = useStrategies("WBTC");
 
-  const getBestApy = (strategies: Strategy[]) => {
+  const getBestApy = (strategies: StrategyType[]) => {
     if (strategies.length === 0) return 0;
     const apy = strategies.map((strategy) => strategy.netApy);
     return Math.round(Math.max(...apy));

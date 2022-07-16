@@ -6,7 +6,7 @@ import useIronBankReserves from "./ironBankReserves";
 import { Reserve } from "./reserves";
 import useYields, { Yield } from "./yields";
 
-export interface Strategy {
+export interface StrategyType {
   collateral: Reserve;
   debt: Reserve;
   yield: Yield;
@@ -17,7 +17,7 @@ const getStrategies = (
   yields: Yield[],
   reserves: Reserve[],
   token: string
-): Strategy[] => {
+): StrategyType[] => {
   const collateral = reserves.find(
     (reserve) => isPegged(reserve.symbol, token) && reserve.canUseAsCollateral
   );
@@ -70,7 +70,7 @@ const getStrategies = (
   });
 };
 
-const useStrategies = (token: string): Strategy[] => {
+const useStrategies = (token: string): StrategyType[] => {
   const aaveReserves = useAaveReserves();
   const compoundReserves = useCompoundReserves();
   const ironBankReserves = useIronBankReserves();
