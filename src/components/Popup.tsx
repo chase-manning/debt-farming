@@ -42,7 +42,6 @@ const Area = styled.div`
   padding: 3rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
 `;
 
 const ExitButton = styled.button`
@@ -59,6 +58,13 @@ const Exit = styled.img`
 const Header = styled.div`
   font-size: 3rem;
   margin-bottom: 1rem;
+
+  line-height: 1.3;
+  background: -webkit-linear-gradient(45deg, var(--three), var(--two));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: brightness(0.93) saturate(1.2);
+  transform: translateY(-1rem);
 `;
 
 const SubHeader = styled.div`
@@ -71,6 +77,9 @@ const Content = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 100%;
 `;
 
 interface Props {
