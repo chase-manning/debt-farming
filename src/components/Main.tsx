@@ -3,12 +3,13 @@ import styled from "styled-components";
 import Details from "./Details";
 import Hero from "./Hero";
 
-// TODO Launch
 // TODO Max peer review
 // TODO Vinnie peer review
 // TODO share with backd
 // TODO Share on Twitter
 
+// TODO Make open source
+// TODO Add socials
 // TOOD Add swap suppor for collateral
 // TODO Farming clipping
 // TODO Clickable elements on details popup

@@ -17,7 +17,7 @@ const Container = styled.div`
   transition: transform 1s ease-in-out;
   transform: translate(-50%, -50%)
     ${({ show }: PopupProps) => (show ? "rotate(0)" : "rotate(-180deg)")};
-  transform-origin: 50% calc(100% + (100vh - 800px) / 2);
+  transform-origin: 50% calc(100% + (100vh - 800px) / 1.5);
 
   @media (max-width: 600px) {
     transform: none;
