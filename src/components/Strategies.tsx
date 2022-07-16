@@ -6,11 +6,24 @@ import table from "../assets/details/table.svg";
 import Strategy from "./Strategy";
 import Token from "./Token";
 
+interface PopupProps {
+  show: boolean;
+}
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
+
+  transition: transform 1s ease-in-out;
+  transform: ${({ show }: PopupProps) =>
+    show ? "rotate(0)" : "rotate(-180deg)"};
+  transform-origin: 50% calc(100% + (100vh - 700px) / 2);
+
+  @media (max-width: 600px) {
+    transform: none;
+  }
 `;
 
 const TokenSelector = styled.div`
@@ -49,26 +62,16 @@ const TokenOption = styled.button`
   }
 `;
 
-interface PopupProps {
-  show: boolean;
-}
-
 const StyledStrategies = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-
-  transition: transform 1s ease-in-out;
-  transform: ${({ show }: PopupProps) =>
-    show ? "rotate(0)" : "rotate(-180deg)"};
-  transform-origin: 50% calc(100% + (100vh - 700px) / 2);
 
   @media (max-width: 600px) {
     background: var(--bg);
     border-radius: 1rem;
     width: 100%;
     margin-top: 3rem;
-    transform: none;
   }
 `;
 
@@ -177,7 +180,7 @@ const Strategies = ({ token, setToken }: Props) => {
   const maxPages = Math.ceil(strategies.length / rowsPerPage);
 
   return (
-    <Container>
+    <Container show={active === null}>
       <TokenSelector>
         <TokenOption onClick={() => setToken("USDC")} active={token === "USDC"}>
           <Token symbol="USDC" />
@@ -189,7 +192,7 @@ const Strategies = ({ token, setToken }: Props) => {
           <Token symbol="WBTC" />
         </TokenOption>
       </TokenSelector>
-      <StyledStrategies show={active === null}>
+      <StyledStrategies>
         <Background src={table} alt="Table background" />
         <Content>
           <Table>
