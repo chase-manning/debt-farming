@@ -3,8 +3,6 @@ import styled from "styled-components";
 import Details from "./Details";
 import Hero from "./Hero";
 
-// TODO Add anylytics
-// TODO Add base token toggle
 // TODO Implement mobile
 // TODO Update all metadata and SEO
 // TODO Farming clipping
@@ -38,7 +36,7 @@ const HomePage = () => {
   return (
     <StyledHomePage>
       <Hero setToken={(token: string) => setToken(token)} />
-      <Details token={token} />
+      <Details token={token} setToken={(token: string) => setToken(token)} />
     </StyledHomePage>
   );
 };

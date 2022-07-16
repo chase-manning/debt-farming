@@ -4,6 +4,40 @@ import styled from "styled-components";
 import useStrategies, { StrategyType } from "../views/strategies";
 import table from "../assets/details/table.svg";
 import Strategy from "./Strategy";
+import Token from "./Token";
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+`;
+
+const TokenSelector = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+interface TokenOptionProps {
+  active: boolean;
+}
+
+const TokenOption = styled.button`
+  cursor: pointer;
+  font-size: 1.6rem;
+  padding: 1rem 2rem;
+  margin: 0 1rem;
+  background: ${(props: TokenOptionProps) =>
+    props.active ? "none" : "var(--bg)"};
+
+  border-bottom: solid 2px var(--main);
+  border-right: solid 2px var(--main);
+  border-left: solid
+    ${(props: TokenOptionProps) => (props.active ? "2px" : "4px")} var(--main);
+  border-top: solid
+    ${(props: TokenOptionProps) => (props.active ? "2px" : "4px")} var(--main);
+  border-radius: 0.5rem;
+`;
 
 interface PopupProps {
   show: boolean;
@@ -88,9 +122,10 @@ const HeaderEnd = styled.div`
 
 interface Props {
   token: string;
+  setToken: (token: string) => void;
 }
 
-const Strategies = ({ token }: Props) => {
+const Strategies = ({ token, setToken }: Props) => {
   const strategies = useStrategies(token);
   const [page, setPage] = useState(0);
   const [active, setActive] = useState<number | null>(null);
@@ -99,56 +134,69 @@ const Strategies = ({ token }: Props) => {
   const maxPages = Math.ceil(strategies.length / rowsPerPage);
 
   return (
-    <StyledStrategies show={active === null}>
-      <Background src={table} alt="Table background" />
-      <Content>
-        <Table>
-          <Headers>
-            <Header>Net APY</Header>
-            <Header>Lending Protocol</Header>
-            <Header>Debt Token</Header>
-            <Header>Yield Protocol</Header>
-            <Header>Yield Token</Header>
-            <HeaderEnd />
-          </Headers>
-          {strategies
-            .sort((a: StrategyType, b: StrategyType) => b.netApy - a.netApy)
-            .slice(rowsPerPage * page, rowsPerPage * (page + 1))
-            .map((strategy: StrategyType, index: number) => (
-              <Strategy
-                strategy={strategy}
-                key={index}
-                showing={active === null ? false : index !== active}
-                setShowing={() => {
-                  if (active === null) setActive(index);
-                  else setActive(null);
-                }}
-              />
-            ))}
-        </Table>
-        <Pages>
-          <Previus
-            onClick={() => {
-              if (page > 0) {
-                setPage(page - 1);
-              }
-            }}
-          >
-            Prev
-          </Previus>
-          <Page>{`${page + 1}/${maxPages}`}</Page>
-          <Next
-            onClick={() => {
-              if (page < maxPages - 1) {
-                setPage(page + 1);
-              }
-            }}
-          >
-            Next
-          </Next>
-        </Pages>
-      </Content>
-    </StyledStrategies>
+    <Container>
+      <TokenSelector>
+        <TokenOption onClick={() => setToken("USDC")} active={token === "USDC"}>
+          <Token symbol="USDC" />
+        </TokenOption>
+        <TokenOption onClick={() => setToken("ETH")} active={token === "ETH"}>
+          <Token symbol="ETH" />
+        </TokenOption>
+        <TokenOption onClick={() => setToken("WBTC")} active={token === "WBTC"}>
+          <Token symbol="WBTC" />
+        </TokenOption>
+      </TokenSelector>
+      <StyledStrategies show={active === null}>
+        <Background src={table} alt="Table background" />
+        <Content>
+          <Table>
+            <Headers>
+              <Header>Net APY</Header>
+              <Header>Lending Protocol</Header>
+              <Header>Debt Token</Header>
+              <Header>Yield Protocol</Header>
+              <Header>Yield Token</Header>
+              <HeaderEnd />
+            </Headers>
+            {strategies
+              .sort((a: StrategyType, b: StrategyType) => b.netApy - a.netApy)
+              .slice(rowsPerPage * page, rowsPerPage * (page + 1))
+              .map((strategy: StrategyType, index: number) => (
+                <Strategy
+                  strategy={strategy}
+                  key={index}
+                  showing={active === null ? false : index !== active}
+                  setShowing={() => {
+                    if (active === null) setActive(index);
+                    else setActive(null);
+                  }}
+                />
+              ))}
+          </Table>
+          <Pages>
+            <Previus
+              onClick={() => {
+                if (page > 0) {
+                  setPage(page - 1);
+                }
+              }}
+            >
+              Prev
+            </Previus>
+            <Page>{`${page + 1}/${maxPages}`}</Page>
+            <Next
+              onClick={() => {
+                if (page < maxPages - 1) {
+                  setPage(page + 1);
+                }
+              }}
+            >
+              Next
+            </Next>
+          </Pages>
+        </Content>
+      </StyledStrategies>
+    </Container>
   );
 };
 

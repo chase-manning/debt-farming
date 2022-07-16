@@ -106,10 +106,10 @@ const Popup = ({
       <Background src={popup} alt="Popup background" />
       <ContentContainer>
         <Area>
+          {header && <Header>{header}</Header>}
           <ExitButton onClick={() => close()}>
             <Exit src={exit} />
           </ExitButton>
-          {header && <Header>{header}</Header>}
           {subHeader && <SubHeader>{subHeader}</SubHeader>}
           {children && <Content>{children}</Content>}
           {buttonText && buttonAction && (

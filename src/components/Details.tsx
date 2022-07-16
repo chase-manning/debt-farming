@@ -24,15 +24,21 @@ const Background = styled.img`
   z-index: -1;
 `;
 
+const Header = styled.div`
+  font-size: 3rem;
+`;
+
 interface Props {
   token: string;
+  setToken: (token: string) => void;
 }
 
-const Details = ({ token }: Props) => {
+const Details = ({ token, setToken }: Props) => {
   return (
     <StyledDetails id="details-scroll">
       <Background src={gradient} alt="Gradient background" />
-      <Strategies token={token} />
+      <Header>The best yields using your favorite tokens</Header>
+      <Strategies setToken={setToken} token={token} />
     </StyledDetails>
   );
 };
