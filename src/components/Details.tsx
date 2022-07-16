@@ -12,6 +12,7 @@ const StyledDetails = styled.div`
   justify-content: space-evenly;
   position: relative;
   z-index: 1;
+  overflow: hidden;
 `;
 
 const Background = styled.img`
