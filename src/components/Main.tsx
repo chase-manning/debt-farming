@@ -3,9 +3,6 @@ import styled from "styled-components";
 import Details from "./Details";
 import Hero from "./Hero";
 
-// TODO Max peer review
-// TODO Vinnie peer review
-// TODO share with backd
 // TODO Share on Twitter
 // TODO List on all protocol sites
 

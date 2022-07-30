@@ -1,6 +1,14 @@
 import { useEffect, useState } from "react";
 import { ethToken, TOKENLIST_URL } from "../app/constants";
 
+const manualTokens: Token[] = [
+  {
+    symbol: "bveCVX",
+    url: "https://app.badger.com/assets/icons/bvecvx.svg",
+    name: "Badger Vested Escrow Convex Token",
+  },
+];
+
 export interface Token {
   symbol: string;
   url: string;
@@ -36,7 +44,7 @@ const useTokens = () => {
     fetchTokens();
   }, []);
 
-  return [ethToken, ...tokens];
+  return [ethToken, ...tokens, ...manualTokens];
 };
 
 export default useTokens;
