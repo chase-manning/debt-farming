@@ -10,7 +10,7 @@ const tokenPrefixes: TokenPrefix[] = [
   },
   {
     protocol: "yearn-finance",
-    prefix: "yv",
+    prefix: "YV",
   },
   {
     protocol: "vesper",
