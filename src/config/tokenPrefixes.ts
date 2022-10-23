@@ -36,6 +36,10 @@ const tokenPrefixes: TokenPrefix[] = [
     protocol: "damm-finance",
     prefix: "D",
   },
+  {
+    protocol: "tenderize",
+    prefix: "T",
+  },
 ];
 
 export default tokenPrefixes;
