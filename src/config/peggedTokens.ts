@@ -8,7 +8,7 @@ export const isPegged = (tokenA: string, tokenB: string): boolean => {
 };
 
 const peggedTokens: string[][] = [
-  ["ETH", "WETH", "stETH", "STETH", "wstETH"],
+  ["ETH", "WETH", "stETH", "STETH", "wstETH", "WSTETH"],
   ["CRV", "CVXCRV", "ST-YCRV", "LP-YCRV"],
   ["FXS", "cvxFXS"],
   ["CVX", "BVECVX"],
