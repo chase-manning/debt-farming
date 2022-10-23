@@ -52,11 +52,6 @@ const useLamaYields = (): Yield[] => {
           .map((res: Response) => {
             let { symbol } = res;
             const protocol = res.project;
-            let meow = false;
-            if (symbol === "ST-YCRV") {
-              meow = true;
-              console.log(symbol);
-            }
 
             // Removing parenthesis from symbol
             symbol = removeParentheses(symbol);
@@ -76,11 +71,6 @@ const useLamaYields = (): Yield[] => {
               if (!symbol.startsWith(prefix.prefix)) return;
               symbol = symbol.replace(prefix.prefix, "");
             });
-
-            if (meow) {
-              console.log("meow");
-              console.log(symbol);
-            }
 
             // Returning the yield
             return {
