@@ -16,12 +16,12 @@ export interface Token {
 }
 
 interface Response {
-  address: "0xb6ed7644c69416d67b522e20bc294a9a9b405b31";
-  chainId: 1;
-  decimals: 8;
-  logoURI: "https://zapper.fi/images/0XBTC-icon.png";
-  name: "0xBitcoin";
-  symbol: "0XBTC";
+  address: string;
+  chainId: number;
+  decimals: number;
+  logoURI: string;
+  name: string;
+  symbol: string;
 }
 
 const useTokens = () => {
