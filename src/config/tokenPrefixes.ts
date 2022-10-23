@@ -6,7 +6,7 @@ export interface TokenPrefix {
 const tokenPrefixes: TokenPrefix[] = [
   {
     protocol: "compound",
-    prefix: "c",
+    prefix: "C",
   },
   {
     protocol: "yearn-finance",
@@ -14,11 +14,15 @@ const tokenPrefixes: TokenPrefix[] = [
   },
   {
     protocol: "vesper",
-    prefix: "va",
+    prefix: "VA",
   },
   {
     protocol: "vesper",
-    prefix: "v",
+    prefix: "V",
+  },
+  {
+    protocol: "vesper",
+    prefix: "VE",
   },
 ];
 
