@@ -11,7 +11,7 @@ const peggedTokens: string[][] = [
   ["ETH", "WETH", "stETH", "STETH", "wstETH"],
   ["CRV", "cvxCRV", "ST-YCRV", "LP-YCRV"],
   ["FXS", "cvxFXS"],
-  ["CVX", "bveCVX"],
+  ["CVX", "BVECVX"],
 ];
 
 export default peggedTokens;
