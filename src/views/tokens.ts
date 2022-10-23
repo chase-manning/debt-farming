@@ -41,7 +41,11 @@ const useTokens = () => {
         })
       );
     };
-    fetchTokens();
+    try {
+      fetchTokens();
+    } catch (e) {
+      console.log(e);
+    }
   }, []);
 
   return [ethToken, ...tokens, ...manualTokens];
