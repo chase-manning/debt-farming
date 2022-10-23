@@ -18,11 +18,23 @@ const tokenPrefixes: TokenPrefix[] = [
   },
   {
     protocol: "vesper",
-    prefix: "V",
+    prefix: "VE",
   },
   {
     protocol: "vesper",
-    prefix: "VE",
+    prefix: "V",
+  },
+  {
+    protocol: "damm-finance",
+    prefix: "DA",
+  },
+  {
+    protocol: "damm-finance",
+    prefix: "DC",
+  },
+  {
+    protocol: "damm-finance",
+    prefix: "D",
   },
 ];
 
